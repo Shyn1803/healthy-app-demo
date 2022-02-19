@@ -36,6 +36,63 @@ $spacers: (
   xl: 8 * $base-spacer
 );
 
+// Custom scroll-bar
+$width-scroll-bar: 5px;
+$border-radius: 5px;
+$bar-color: #313631;
+$gray-200: #1c0c0b;
+$track-color: $gray-400;
+@mixin custom-scrollbar(
+  $direction: "vertical",
+  $width: $width-scroll-bar,
+  $color: $bar-color,
+  $track-color: $track-color
+) {
+  @if ($direction == "vertical") {
+    overflow-y: auto;
+    overflow-y: overlay;
+  } @else {
+    overflow-x: auto;
+    overflow-x: overlay;
+  }
+  &::-webkit-scrollbar {
+    @if ($direction == "vertical") {
+      width: $width;
+    } @else {
+      height: $width;
+    }
+  }
+  &::-webkit-scrollbar:window-inactive {
+    @if ($direction == "vertical") {
+      width: $width;
+    } @else {
+      height: $width;
+    }
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background-color: $track-color;
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: $border-radius;
+    background: $color;
+  }
+  &::-webkit-scrollbar-thumb:window-inactive {
+    // background: rgba($color, 0.4);
+    // display: none;
+  }
+}
+
+@mixin custom-scrollbar-body($direction: "vertical") {
+  @if ($direction == "vertical") {
+    overflow-y: auto;
+    overflow-y: overlay;
+  } @else {
+    overflow-x: auto;
+    overflow-x: overlay;
+  }
+}
 
 @mixin line-clamp($lines: 2) {
   -webkit-line-clamp: $lines;

@@ -1,4 +1,4 @@
-import { BackTop, Col, Layout, Row } from 'antd';
+import { BackTop, Layout } from 'antd';
 import React, { FC, memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';

@@ -122,7 +122,6 @@ function MyRecord() {
           <div className="my-diary-title">MY DIARY</div>
           <div className="diary-list">
             {diaryData?.map((item, index) => {
-              console.log(item);
               return (
                 <div className="diary-item-wrapper" key={index}>
                   <div className="date-time">
