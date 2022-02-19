@@ -7,7 +7,7 @@ import Column from 'src/pages/Column';
 import PageNotFound from 'src/pages/errors/PageNotFound';
 import ServerError from 'src/pages/errors/ServerError';
 import HomePage from 'src/pages/home/Home';
-import MyRecord from 'src/pages/MyRecord';
+import MyRecord from 'src/pages/myRecord/MyRecord';
 import { RouteLayout } from '../components/router/RouteLayout';
 import { PATH } from './path';
 

@@ -7,10 +7,9 @@ import Loading from 'src/components/common/Loading';
 import { setIsCollapsed } from 'src/features/collapsedMenu/collapsedMenu';
 import { PATH } from 'src/routes/path';
 import { RootState } from 'src/store';
-import BreadcrumbMenu from './Breadcrumb';
 import Header from 'src/components/header';
+import Footer from 'src/components/footer';
 
-const { Content } = Layout;
 type Props = {
   children: React.ReactNode;
 };
@@ -36,6 +35,7 @@ const MainLayout: FC<Props> = (props) => {
       <Layout className="site-layout">
         <Header />
         <div className="site-layout-background site-layout-content">{props.children}</div>
+        <Footer />
       </Layout>
       <BackTop />
     </Layout>

@@ -1,0 +1,27 @@
+@import "/src/styles/variables.scss";
+
+.hexagonMenuContainer {
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  :global {
+    .content {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $light;
+      
+      .label {
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+      }
+    }
+  }
+}

@@ -8,6 +8,8 @@ $dark-600: #2E2E2E;
 $dark-500: #414141;
 $gray-400: #777777;
 
+$box-shadow-hight-light: #FCA500;
+
 // Grids
 $grid-breakpoints: (
   md: 768px,
@@ -18,6 +20,8 @@ $container-max-widths: (
   md: 390px,
   lg: 980px,
 );
+
+$border-radius: 5px;
 
 // measurement
 $header-height: 64px;

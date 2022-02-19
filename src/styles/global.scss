@@ -13,7 +13,21 @@
   font-display: swap;
 }
 
-.content-container {
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter-Regular.eot"); /* IE9 Compat Modes */
+  src: url("/assets/fonts/Inter-Regular.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/assets/fonts/Inter-Regular.svg") format("svg"),
+    /* Legacy iOS */ url("/assets/fonts/Inter-Regular.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("/assets/fonts/Inter-Regular.woff") format("woff"),
+    /* Modern Browsers */ url("/assets/fonts/Inter-Regular.woff2") format("woff2"); /* Modern Browsers */
+
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.container {
   max-width: 980px;
   margin: auto;
 }

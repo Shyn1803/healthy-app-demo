@@ -1,0 +1,51 @@
+@import "/src/styles/variables.scss";
+
+.recordComponentContainer {
+  position: relative;
+  padding: 24px;
+
+  :global {
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: $primary-300;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-wrapper {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+
+      .title {
+        color: $primary-300;
+        font-size: 25px;
+        font-family: 'Inter', sans-serif;
+        margin-bottom: 10px;
+      }
+
+      .description-wrapper {
+        width: 160px;
+        height: 24px;
+        background-color: $primary-400;
+
+        .description {
+          color: $light;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
