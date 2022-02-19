@@ -5,6 +5,8 @@ interface AuthenticateState {
   user: any;
   loading: boolean;
   error: any;
+  diet: any[];
+  diary: any[];
 }
 
 const initialState: AuthenticateState = {
@@ -12,6 +14,8 @@ const initialState: AuthenticateState = {
   loading: false,
   user: undefined,
   error: null,
+  diet: [],
+  diary: [],
 };
 
 export const login = createAsyncThunk('users/login', async (params: any) => {
@@ -37,6 +41,13 @@ export const authenticateSlice = createSlice({
     },
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
+    },
+    setDiet: (state, action: PayloadAction<any>) => {
+      state.diet = [...state.diet, ...action.payload];
+    },
+    setDiary: (state, action: PayloadAction<any>) => {
+      console.log('action.payload: ', action.payload);
+      state.diary = [...state.diary, ...action.payload];
     },
     logOut: (state) => {
       state.token = '';
@@ -69,26 +80,9 @@ export const authenticateSlice = createSlice({
       localStorage.setItem('accessToken', action.payload.data.token);
       localStorage.setItem('user', JSON.stringify(action.payload.data));
     });
-
-    // builder.addCase(getMe.pending, (state) => {
-    //   state.loading = true;
-    // });
-
-    // builder.addCase(getMe.rejected, (state, action) => {
-    //   state.error = action.error;
-    //   // state.user = undefined;
-    //   // localStorage.removeItem('user');
-    //   // localStorage.removeItem('accessToken');
-    //   state.loading = false;
-    // });
-
-    // builder.addCase(getMe.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.user = action.payload.data;
-    // });
   },
 });
 
 const { actions, reducer } = authenticateSlice;
-export const { setToken, removeToken, setUser, logOut, setLoading } = actions;
+export const { setToken, removeToken, setUser, logOut, setLoading, setDiet, setDiary } = actions;
 export default reducer;

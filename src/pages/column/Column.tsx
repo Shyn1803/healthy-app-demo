@@ -85,8 +85,6 @@ const COLUMN_DATA = [
 function Column() {
   // const user = useSelector((state: any) => state.collapsed.isCollapsed);
 
-  const today = new Date();
-  const month = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
   const [diaryData, setDiaryData] = useState<any[]>([]);
 
   useEffect(() => {

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import RecordComponent from 'src/components/recordComponent';
 import { RECORD_GROUP_DATA } from 'src/utils/constants';
+import LineChartComponent from 'src/components/lineChartComponent/LineChartComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDiary } from 'src/features/auth/authenticate';
+import { getDiary } from 'src/api/userApi';
+import { format } from 'date-fns';
 import styles from './MyRecord.module.scss';
 
 const EXERCISE_DATA = [
@@ -47,41 +52,33 @@ const EXERCISE_DATA = [
 ];
 
 function MyRecord() {
-  // const user = useSelector((state: any) => state.collapsed.isCollapsed);
+  const diaryData = useSelector((state: any) => state.user.diary);
 
   const today = new Date();
   const month = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
-  const [diaryData, setDiaryData] = useState<any[]>([]);
 
-  useEffect(() => {
-    fakeDiaryData();
-    console.log('diaryData: ', diaryData);
-  }, []);
+  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
-  const fakeDiaryData = () => {
-    for (let index = 0; index < 8; index++) {
-      diaryData.push({
-        dateTime: '2022-05-21 23:25:00.000',
-        title: '私の日記の記録が一部表示されます。',
-        note: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト…',
+  const fetchDiary = () => {
+    setLoading(true);
+    getDiary()
+      .then((response) => {
+        dispatch(setDiary(response));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
       });
-    }
-
-    setDiaryData(diaryData);
   };
 
-  const onLoadMoreFood = () => {
-    const newData = diaryData;
-    for (let index = 0; index < 8; index++) {
-      newData.push({
-        dateTime: '2022-05-21 23:25:00.000',
-        title: '私の日記の記録が一部表示されます。',
-        note: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト…',
-      });
-    }
+  useEffect(() => {
+    fetchDiary();
+  }, []);
 
-    setDiaryData(newData);
-    console.log('diaryData: ', diaryData);
+  const onLoadMoreFood = () => {
+    fetchDiary();
   };
 
   return (
@@ -93,6 +90,9 @@ function MyRecord() {
               <RecordComponent key={index} title={item.title} description={item.description} imageUrl={item.imageUrl} />
             );
           })}
+        </section>
+        <section className="section body-record">
+          <LineChartComponent />
         </section>
         <section className="section my-exercise">
           <div className="section-header-wrapper">
@@ -121,18 +121,16 @@ function MyRecord() {
         <section className="section my-diary">
           <div className="my-diary-title">MY DIARY</div>
           <div className="diary-list">
-            {diaryData?.map((item, index) => {
+            {diaryData?.map((item: any, index: any) => {
               return (
                 <div className="diary-item-wrapper" key={index}>
                   <div className="date-time">
-                    <span className="date">2021.05.21</span>
-                    <span className="time">23:25</span>
+                    <span className="date">{format(new Date(item.dateTime), 'yyyy.MM.dd')}</span>
+                    <span className="time">{format(new Date(item.dateTime), 'HH:mm')}</span>
                   </div>
                   <div className="content">
-                    <div className="title">私の日記の記録が一部表示されます。</div>
-                    <div className="content">
-                      テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト…
-                    </div>
+                    <div className="title">{item.title}</div>
+                    <div className="note">{item.note}</div>
                   </div>
                 </div>
               );

@@ -117,6 +117,10 @@
             .content {
               margin-top: 8px;
               font-size: 12px;
+
+              .note {
+                @include line-clamp(5);
+              }
             }
           }
         }

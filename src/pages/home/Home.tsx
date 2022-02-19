@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Progress } from 'antd';
 import Image from 'src/components/image/Image';
 import BannerPhoto from 'src/assets/photos/banner-photo.png';
@@ -7,8 +7,12 @@ import { KnifeIcon } from 'src/icons/KnifeIcon';
 import { CupIcon } from 'src/icons/CupIcon';
 import HexagonMenu from 'src/components/hexagonMenu';
 import FoodComponent from 'src/components/foodComponent';
-import { FOOD_DATA } from 'src/utils/fakeData';
+import { format } from 'date-fns';
 import styles from './Home.module.scss';
+import LineChartComponent from 'src/components/lineChartComponent/LineChartComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDiet } from 'src/features/auth/authenticate';
+import { getDiet } from 'src/api/userApi';
 
 const HEXAGON_MENU = [
   {
@@ -30,10 +34,30 @@ const HEXAGON_MENU = [
 ];
 
 function Homepage() {
-  // const user = useSelector((state: any) => state.collapsed.isCollapsed);
+  const dietData = useSelector((state: any) => state.user.diet);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const fetchDiet = () => {
+    setLoading(true);
+    getDiet()
+      .then((response) => {
+        dispatch(setDiet(response));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchDiet();
+  }, []);
 
   const onLoadMoreFood = () => {
-    console.log('load more food.');
+    fetchDiet();
   };
 
   return (
@@ -50,7 +74,9 @@ function Homepage() {
           </div>
         </div>
         <div className="right">
-          <div className="chart-wrapper"></div>
+          <div className="chart-wrapper">
+            <LineChartComponent />
+          </div>
         </div>
       </div>
       <div className="container">
@@ -61,10 +87,17 @@ function Homepage() {
         </div>
 
         <div className="food-list-wrapper">
-          {FOOD_DATA?.map(
+          {dietData?.map(
             (item: { imageUrl: string; date: string; period: string }, index: React.Key | null | undefined) => {
               const { imageUrl, date, period } = item;
-              return <FoodComponent key={index} imageUrl={imageUrl} date={date} period={period} />;
+              return (
+                <FoodComponent
+                  key={index}
+                  imageUrl={imageUrl}
+                  date={format(new Date(date), 'MM.yyyy')}
+                  period={period}
+                />
+              );
             },
           )}
         </div>
