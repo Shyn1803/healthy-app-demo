@@ -11,8 +11,8 @@ type Props = {
 const RecordComponent: FC<Props> = ({ title, description, imageUrl }) => {
   return (
     <div className={styles.recordComponentContainer}>
-      <div className="background"></div>
       <Image source={imageUrl} />
+      <div className="background"></div>
       <div className="content-wrapper">
         <span className="title">{title}</span>
         <div className="description-wrapper">

@@ -61,10 +61,12 @@ function Homepage() {
         </div>
 
         <div className="food-list-wrapper">
-          {FOOD_DATA?.map((item, index) => {
-            const { imageUrl, date, period } = item;
-            return <FoodComponent key={index} imageUrl={imageUrl} date={date} period={period} />;
-          })}
+          {FOOD_DATA?.map(
+            (item: { imageUrl: string; date: string; period: string }, index: React.Key | null | undefined) => {
+              const { imageUrl, date, period } = item;
+              return <FoodComponent key={index} imageUrl={imageUrl} date={date} period={period} />;
+            },
+          )}
         </div>
         <div className="btn-wrapper">
           <button className="btn-load-more" onClick={onLoadMoreFood}>

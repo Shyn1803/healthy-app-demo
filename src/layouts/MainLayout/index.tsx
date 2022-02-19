@@ -9,6 +9,7 @@ import { PATH } from 'src/routes/path';
 import { RootState } from 'src/store';
 import Header from 'src/components/header';
 import Footer from 'src/components/footer';
+import './styles.scss';
 
 type Props = {
   children: React.ReactNode;
