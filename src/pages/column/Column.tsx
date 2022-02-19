@@ -130,7 +130,7 @@ function Column() {
         </section>
         <section className="section column-section">
           <div className="column-list">
-            {COLUMN_DATA?.map((item, index) => {
+            {COLUMN_DATA?.map((item) => {
               const { imageUrl, date, time, description, tags } = item;
               return (
                 <ColumnComponent imageUrl={imageUrl} date={date} time={time} description={description} tags={tags} />

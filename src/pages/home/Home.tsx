@@ -7,7 +7,7 @@ import { KnifeIcon } from 'src/icons/KnifeIcon';
 import { CupIcon } from 'src/icons/CupIcon';
 import HexagonMenu from 'src/components/hexagonMenu';
 import FoodComponent from 'src/components/foodComponent';
-import { FOOD_DATA } from 'src/utils/data';
+import { FOOD_DATA } from 'src/utils/fakeData';
 import styles from './Home.module.scss';
 
 const HEXAGON_MENU = [
