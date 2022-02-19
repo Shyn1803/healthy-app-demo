@@ -8,9 +8,9 @@ import { setIsCollapsed } from 'src/features/collapsedMenu/collapsedMenu';
 import { PATH } from 'src/routes/path';
 import { RootState } from 'src/store';
 import BreadcrumbMenu from './Breadcrumb';
-import HeaderTop from './Header';
+import Header from 'src/components/header';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 type Props = {
   children: React.ReactNode;
 };
@@ -34,19 +34,8 @@ const MainLayout: FC<Props> = (props) => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Layout className="site-layout">
-        <Header className="site-layout-header site-layout-background">
-          <HeaderTop />
-        </Header>
-        <Content style={{ margin: '0 16px' }}>
-          <div className="breadcrumbMenu">
-            <Row>
-              <Col xs={0} sm={24} span={24}>
-                <BreadcrumbMenu />
-              </Col>
-            </Row>
-          </div>
-          <div className="site-layout-background site-layout-content">{props.children}</div>
-        </Content>
+        <Header />
+        <div className="site-layout-background site-layout-content">{props.children}</div>
       </Layout>
       <BackTop />
     </Layout>

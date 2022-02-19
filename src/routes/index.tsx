@@ -20,7 +20,6 @@ export const RootRouter = React.memo(() => {
 
       <RouteLayout path={PATH.PAGE_404} component={PageNotFound} layout={GuestLayout} isPrivate={false} />
       <RouteLayout path={PATH.PAGE_500} component={ServerError} layout={GuestLayout} isPrivate={false} />
-      <RouteLayout path="*" component={PageNotFound} layout={GuestLayout} isPrivate={false} />
 
       <RouteLayout path={PATH.HOME} component={HomePage} layout={MainLayout} />
     </Switch>

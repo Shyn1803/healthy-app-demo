@@ -1,5 +1,4 @@
 import React from 'react';
-// import { RouteProps } from 'react-router';
 import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import { useAuthenticatedByLocalStorage } from 'src/hooks/useAuthenticated';
 import { PATH } from 'src/routes/path';

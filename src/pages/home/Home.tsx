@@ -1,9 +1,14 @@
 import React from 'react';
+import Header from 'src/components/header';
 
-function Home() {
+function Homepage() {
   // const user = useSelector((state: any) => state.collapsed.isCollapsed);
 
-  return <div>Homepage</div>;
+  return (
+    <div className="homepage-container">
+      <div>Homepage</div>
+    </div>
+  );
 }
 
-export default Home;
+export default Homepage;

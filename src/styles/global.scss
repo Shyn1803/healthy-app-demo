@@ -1,0 +1,19 @@
+// Font-face
+@font-face {
+  font-family: "NotoSansJP";
+  src: url("/assets/fonts/NotoSansJP-Regular-Alphabetic.eot"); /* IE9 Compat Modes */
+  src: url("/assets/fonts/NotoSansJP-Regular-Alphabetic.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/assets/fonts/NotoSansJP-Regular-Alphabetic.svg") format("svg"),
+    /* Legacy iOS */ url("/assets/fonts/NotoSansJP-Regular-Alphabetic.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("/assets/fonts/NotoSansJP-Regular-Alphabetic.woff") format("woff"),
+    /* Modern Browsers */ url("/assets/fonts/NotoSansJP-Regular-Alphabetic.woff2") format("woff2"); /* Modern Browsers */
+
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.content-container {
+  max-width: 980px;
+  margin: auto;
+}

@@ -1,0 +1,26 @@
+@use "sass:map";
+@import "/src/styles/variables.scss";
+
+.navigatorWrapper {
+  padding-top: map-get($spacers, "sm");
+  padding-bottom: map-get($spacers, "sm");
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  :global {
+    .item-wrapper {
+      width: 160px;
+      display: flex;
+      color: $light;
+      align-items: center;
+      padding: map-get($spacers, "sm");
+
+      .icon-wrapper {
+        width: 32px;
+        height: 32px;
+        margin-right: map-get($spacers, "sm");
+      }
+    }
+  }
+}
