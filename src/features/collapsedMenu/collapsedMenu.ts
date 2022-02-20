@@ -5,7 +5,7 @@ interface CollapsedState {
 }
 
 const initialState: CollapsedState = {
-  isCollapsed: false,
+  isCollapsed: true,
 };
 
 export const collapsedSlice = createSlice({

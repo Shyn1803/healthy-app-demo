@@ -1,0 +1,28 @@
+@import "/src/styles/variables.scss";
+
+.hamburgerMenuContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 28px;
+  right: 3px;
+
+  :global {
+    a {
+      white-space: nowrap;
+      height: 72px;
+      padding-left: 32px;
+      width: 280px;
+      background-color: $gray-400;
+      border-bottom: solid 1px rgba($dark-600, 0.25);
+      border-top: solid 1px rgba($light, 0.15);
+      display: flex;
+      align-items: center;
+      color: $light;
+
+      &:hover {
+        color: $primary-300;
+      }
+    }
+  }
+}
