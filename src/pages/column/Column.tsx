@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import RecommendedComponent from 'src/components/recommendedComponent';
 import ColumnComponent from 'src/components/columnComponent';
 import styles from './Column.module.scss';
+import { setColumn } from 'src/features/guest/guest';
+import { getColumn } from 'src/api/guestApi';
+import { useDispatch, useSelector } from 'react-redux';
 
 const RECOMMENDED_DATA = [
   {
@@ -23,99 +26,30 @@ const RECOMMENDED_DATA = [
   },
 ];
 
-const COLUMN_DATA = [
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/47NFxW2/column-1.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/t3qyXM7/column-2.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/kmNCQN0/column-3.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/JtCDvZP/column-4.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/x3MwLzm/column-5.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/bKL5zcd/column-6.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/RcvPBkw/column-7.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-  {
-    description: '魚を食べて頭もカラダも元気に！知っておきたい魚を食べるメリ…',
-    date: '2021.05.17',
-    time: '23:25',
-    imageUrl: 'https://i.ibb.co/Wv6sq9v/column-8.png',
-    tags: ['魚料理', '和食', 'DHA'],
-  },
-];
-
 function Column() {
-  // const user = useSelector((state: any) => state.collapsed.isCollapsed);
+  const columnGuest = useSelector((state: any) => state.guest.column);
+  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
-  const [diaryData, setDiaryData] = useState<any[]>([]);
-
-  useEffect(() => {
-    fakeDiaryData();
-    console.log('diaryData: ', diaryData);
-  }, []);
-
-  const fakeDiaryData = () => {
-    for (let index = 0; index < 8; index++) {
-      diaryData.push({
-        dateTime: '2022-05-21 23:25:00.000',
-        title: '私の日記の記録が一部表示されます。',
-        note: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト…',
+  const fetchColumn = () => {
+    setLoading(true);
+    getColumn()
+      .then((response) => {
+        dispatch(setColumn(response));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
       });
-    }
-
-    setDiaryData(diaryData);
   };
 
-  const onLoadMoreFood = () => {
-    const newData = diaryData;
-    for (let index = 0; index < 8; index++) {
-      newData.push({
-        dateTime: '2022-05-21 23:25:00.000',
-        title: '私の日記の記録が一部表示されます。',
-        note: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト…',
-      });
-    }
+  useEffect(() => {
+    fetchColumn();
+  }, []);
 
-    setDiaryData(newData);
-    console.log('diaryData: ', diaryData);
+  const onLoadMoreFood = () => {
+    fetchColumn();
   };
 
   return (
@@ -128,7 +62,7 @@ function Column() {
         </section>
         <section className="section column-section">
           <div className="column-list">
-            {COLUMN_DATA?.map((item) => {
+            {columnGuest?.map((item: any) => {
               const { imageUrl, date, time, description, tags } = item;
               return (
                 <ColumnComponent imageUrl={imageUrl} date={date} time={time} description={description} tags={tags} />
