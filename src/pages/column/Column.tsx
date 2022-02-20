@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import RecommendedComponent from 'src/components/recommendedComponent';
 import ColumnComponent from 'src/components/columnComponent';
-import styles from './Column.module.scss';
 import { setColumn } from 'src/features/guest/guest';
 import { getColumn } from 'src/api/guestApi';
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from 'src/components/common/Loading';
+
+import styles from './Column.module.scss';
 
 const RECOMMENDED_DATA = [
   {
@@ -28,7 +30,7 @@ const RECOMMENDED_DATA = [
 
 function Column() {
   const columnGuest = useSelector((state: any) => state.guest.column);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const fetchColumn = () => {
@@ -61,6 +63,7 @@ function Column() {
           })}
         </section>
         <section className="section column-section">
+          {isLoading && <Loading />}
           <div className="column-list">
             {columnGuest?.map((item: any) => {
               const { imageUrl, date, time, description, tags } = item;

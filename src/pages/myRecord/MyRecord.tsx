@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDiary } from 'src/features/auth/authenticate';
 import { getDiary } from 'src/api/userApi';
 import { format } from 'date-fns';
+import Loading from 'src/components/common/Loading';
 import styles from './MyRecord.module.scss';
 
 const EXERCISE_DATA = [
@@ -57,7 +58,7 @@ function MyRecord() {
   const today = new Date();
   const month = (today.getMonth() + 1).toString().length === 1 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const fetchDiary = () => {
@@ -120,26 +121,29 @@ function MyRecord() {
         </section>
         <section className="section my-diary">
           <div className="my-diary-title">MY DIARY</div>
-          <div className="diary-list">
-            {diaryData?.map((item: any, index: any) => {
-              return (
-                <div className="diary-item-wrapper" key={index}>
-                  <div className="date-time">
-                    <span className="date">{format(new Date(item.dateTime), 'yyyy.MM.dd')}</span>
-                    <span className="time">{format(new Date(item.dateTime), 'HH:mm')}</span>
+          <div className="diary-list-container">
+            {isLoading && <Loading />}
+            <div className="diary-list">
+              {diaryData?.map((item: any, index: any) => {
+                return (
+                  <div className="diary-item-wrapper" key={index}>
+                    <div className="date-time">
+                      <span className="date">{format(new Date(item.dateTime), 'yyyy.MM.dd')}</span>
+                      <span className="time">{format(new Date(item.dateTime), 'HH:mm')}</span>
+                    </div>
+                    <div className="content">
+                      <div className="title">{item.title}</div>
+                      <div className="note">{item.note}</div>
+                    </div>
                   </div>
-                  <div className="content">
-                    <div className="title">{item.title}</div>
-                    <div className="note">{item.note}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="btn-wrapper">
-            <button className="btn-load-more" onClick={onLoadMoreFood}>
-              記録をもっと見る
-            </button>
+                );
+              })}
+            </div>
+            <div className="btn-wrapper">
+              <button className="btn-load-more" onClick={onLoadMoreFood}>
+                記録をもっと見る
+              </button>
+            </div>
           </div>
         </section>
       </div>

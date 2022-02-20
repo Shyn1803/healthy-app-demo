@@ -8,11 +8,12 @@ import { CupIcon } from 'src/icons/CupIcon';
 import HexagonMenu from 'src/components/hexagonMenu';
 import FoodComponent from 'src/components/foodComponent';
 import { format } from 'date-fns';
-import styles from './Home.module.scss';
 import LineChartComponent from 'src/components/lineChartComponent/LineChartComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDiet } from 'src/features/auth/authenticate';
 import { getDiet } from 'src/api/userApi';
+import Loading from 'src/components/common/Loading';
+import styles from './Home.module.scss';
 
 const HEXAGON_MENU = [
   {
@@ -36,7 +37,7 @@ const HEXAGON_MENU = [
 function Homepage() {
   const dietData = useSelector((state: any) => state.user.diet);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const fetchDiet = () => {
@@ -85,26 +86,28 @@ function Homepage() {
             return <HexagonMenu key={item.label} label={item.label} icon={item.icon} />;
           })}
         </div>
-
-        <div className="food-list-wrapper">
-          {dietData?.map(
-            (item: { imageUrl: string; date: string; period: string }, index: React.Key | null | undefined) => {
-              const { imageUrl, date, period } = item;
-              return (
-                <FoodComponent
-                  key={index}
-                  imageUrl={imageUrl}
-                  date={format(new Date(date), 'MM.yyyy')}
-                  period={period}
-                />
-              );
-            },
-          )}
-        </div>
-        <div className="btn-wrapper">
-          <button className="btn-load-more" onClick={onLoadMoreFood}>
-            記録をもっと見る
-          </button>
+        <div className="food-list-container">
+          {isLoading && <Loading />}
+          <div className="food-list-wrapper">
+            {dietData?.map(
+              (item: { imageUrl: string; date: string; period: string }, index: React.Key | null | undefined) => {
+                const { imageUrl, date, period } = item;
+                return (
+                  <FoodComponent
+                    key={index}
+                    imageUrl={imageUrl}
+                    date={format(new Date(date), 'MM.yyyy')}
+                    period={period}
+                  />
+                );
+              },
+            )}
+          </div>
+          <div className="btn-wrapper">
+            <button className="btn-load-more" onClick={onLoadMoreFood}>
+              記録をもっと見る
+            </button>
+          </div>
         </div>
       </div>
     </div>

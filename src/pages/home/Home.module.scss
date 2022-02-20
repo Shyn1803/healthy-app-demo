@@ -64,6 +64,10 @@
       margin: 24px auto;
     }
 
+    .food-list-container {
+      position: relative;
+    }
+
     .food-list-wrapper {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
