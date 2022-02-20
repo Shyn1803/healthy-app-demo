@@ -3,7 +3,7 @@ import RecordComponent from 'src/components/recordComponent';
 import { RECORD_GROUP_DATA } from 'src/utils/constants';
 import LineChartComponent from 'src/components/lineChartComponent/LineChartComponent';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDiary } from 'src/features/auth/authenticate';
+import { setDiary, setInitDiary } from 'src/features/auth/authenticate';
 import { getDiary } from 'src/api/userApi';
 import { format } from 'date-fns';
 import Loading from 'src/components/common/Loading';
@@ -74,8 +74,21 @@ function MyRecord() {
       });
   };
 
+  const initDiary = () => {
+    setLoading(true);
+    getDiary()
+      .then((response) => {
+        dispatch(setInitDiary(response));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
-    fetchDiary();
+    initDiary();
   }, []);
 
   const onLoadMoreFood = () => {

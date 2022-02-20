@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import RecommendedComponent from 'src/components/recommendedComponent';
 import ColumnComponent from 'src/components/columnComponent';
-import { setColumn } from 'src/features/guest/guest';
+import { setColumn, setInitColumn } from 'src/features/guest/guest';
 import { getColumn } from 'src/api/guestApi';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from 'src/components/common/Loading';
@@ -46,8 +46,21 @@ function Column() {
       });
   };
 
+  const fetchInitColumn = () => {
+    setLoading(true);
+    getColumn()
+      .then((response) => {
+        dispatch(setInitColumn(response));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
-    fetchColumn();
+    fetchInitColumn();
   }, []);
 
   const onLoadMoreFood = () => {

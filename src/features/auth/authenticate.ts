@@ -45,9 +45,14 @@ export const authenticateSlice = createSlice({
     setDiet: (state, action: PayloadAction<any>) => {
       state.diet = [...state.diet, ...action.payload];
     },
+    setInitDiet: (state, action: PayloadAction<any>) => {
+      state.diet = action.payload;
+    },
     setDiary: (state, action: PayloadAction<any>) => {
-      console.log('action.payload: ', action.payload);
       state.diary = [...state.diary, ...action.payload];
+    },
+    setInitDiary: (state, action: PayloadAction<any>) => {
+      state.diary = action.payload;
     },
     logOut: (state) => {
       state.token = '';
@@ -84,5 +89,6 @@ export const authenticateSlice = createSlice({
 });
 
 const { actions, reducer } = authenticateSlice;
-export const { setToken, removeToken, setUser, logOut, setLoading, setDiet, setDiary } = actions;
+export const { setToken, removeToken, setUser, logOut, setLoading, setDiet, setInitDiet, setDiary, setInitDiary } =
+  actions;
 export default reducer;

@@ -10,7 +10,7 @@ import FoodComponent from 'src/components/foodComponent';
 import { format } from 'date-fns';
 import LineChartComponent from 'src/components/lineChartComponent/LineChartComponent';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDiet } from 'src/features/auth/authenticate';
+import { setDiet, setInitDiet } from 'src/features/auth/authenticate';
 import { getDiet } from 'src/api/userApi';
 import Loading from 'src/components/common/Loading';
 import styles from './Home.module.scss';
@@ -53,8 +53,21 @@ function Homepage() {
       });
   };
 
+  const initDiet = () => {
+    setLoading(true);
+    getDiet()
+      .then((response) => {
+        dispatch(setInitDiet(response));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
-    fetchDiet();
+    initDiet();
   }, []);
 
   const onLoadMoreFood = () => {

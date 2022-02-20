@@ -15,9 +15,12 @@ export const guestSlice = createSlice({
     setColumn: (state, action) => {
       state.column = [...state.column, ...action.payload];
     },
+    setInitColumn: (state, action) => {
+      state.column = action.payload;
+    },
   },
 });
 
 const { actions, reducer } = guestSlice;
-export const { setColumn } = actions;
+export const { setColumn, setInitColumn } = actions;
 export default reducer;
