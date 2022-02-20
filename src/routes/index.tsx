@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import GuestLayout from 'src/layouts/GuestLayout';
+import BlankLayout from 'src/layouts/BlankLayout';
 import MainLayout from 'src/layouts/MainLayout';
 import Login from 'src/pages/auth/Login';
 import Column from 'src/pages/column/Column';
@@ -14,7 +15,7 @@ import { PATH } from './path';
 export const RootRouter = React.memo(() => {
   return (
     <Switch>
-      <RouteLayout path={PATH.LOGIN} component={Login} layout={GuestLayout} isPrivate={false} />
+      <RouteLayout path={PATH.LOGIN} component={Login} layout={BlankLayout} isPrivate={false} />
       <RouteLayout path={PATH.MY_RECORD} component={MyRecord} layout={MainLayout} />
       <RouteLayout path={PATH.COLUMN} component={Column} layout={GuestLayout} isPrivate={false} />
 
