@@ -2,7 +2,7 @@ export const MENU = [
   {
     id: 'myRecord',
     label: '自分の記録',
-    link: '',
+    link: '/myRecord',
   },
   {
     id: 'challenge',

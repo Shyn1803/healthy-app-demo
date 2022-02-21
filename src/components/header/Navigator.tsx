@@ -4,6 +4,7 @@ import { ChallengeIcon } from 'src/icons/ChallengeIcon';
 import { InfoIcon } from 'src/icons/InfoIcon';
 import { MenuIcon } from 'src/icons/MenuIcon';
 import { MENU } from 'src/utils/constants';
+import { Link } from 'react-router-dom';
 import HamburgerMenu from '../hamburgerMenu/HamburgerMenu';
 import { setIsCollapsed } from 'src/features/collapsedMenu/collapsedMenu';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,14 +24,16 @@ function Navigator() {
     <div className={styles.navigatorWrapper}>
       {MENU?.map((menuItem) => {
         return (
-          <div key={menuItem.id} className="item-wrapper">
-            <div className="icon-wrapper">
-              {menuItem.id === 'myRecord' && <MemoIcon />}
-              {menuItem.id === 'challenge' && <ChallengeIcon />}
-              {menuItem.id === 'notice' && <InfoIcon />}
+          <Link to={menuItem.link} key={menuItem.id}>
+            <div className="item-wrapper">
+              <div className="icon-wrapper">
+                {menuItem.id === 'myRecord' && <MemoIcon />}
+                {menuItem.id === 'challenge' && <ChallengeIcon />}
+                {menuItem.id === 'notice' && <InfoIcon />}
+              </div>
+              <div className="label">{menuItem.label}</div>
             </div>
-            <div className="label">{menuItem.label}</div>
-          </div>
+          </Link>
         );
       })}
       <div className="menu-icon-wrapper">
