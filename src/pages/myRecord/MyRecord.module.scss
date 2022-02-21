@@ -44,6 +44,7 @@
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           grid-gap: 0;
+          @include custom-scrollbar("vertical", $width-scroll-bar, $primary-300, $gray-400);
 
           .exercise-wrapper {
             margin-right: 40px;

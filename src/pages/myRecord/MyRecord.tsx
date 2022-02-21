@@ -50,6 +50,46 @@ const EXERCISE_DATA = [
     time: '10',
     energy: '26kcal',
   },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
+  {
+    exerciseName: '家事全般（立位・軽い）',
+    time: '10',
+    energy: '26kcal',
+  },
 ];
 
 function MyRecord() {
