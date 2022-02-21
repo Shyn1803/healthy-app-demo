@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setIsCollapsed } from 'src/features/collapsedMenu/collapsedMenu';
 import styles from './HamburgerMenu.module.scss';
 
 type Props = {
@@ -7,8 +9,14 @@ type Props = {
 };
 
 const HamburgerMenu: FC<Props> = ({ className }) => {
+  const dispatch = useDispatch();
+
+  const onCloseMenu = () => {
+    dispatch(setIsCollapsed());
+  };
+
   return (
-    <div className={`${styles.hamburgerMenuContainer} ${className}`}>
+    <div className={`${styles.hamburgerMenuContainer} ${className}`} onClick={() => onCloseMenu()}>
       <Link to="/myRecord">自分の記録</Link>
       <Link to="/">体重グラフ</Link>
       <Link to="/">目標</Link>
