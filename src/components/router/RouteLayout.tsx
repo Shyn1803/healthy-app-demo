@@ -7,7 +7,7 @@ type Props = {
   layout: React.ComponentType<any>;
   isPrivate?: boolean;
   redirect?: string;
-  component: React.ComponentType<RouteComponentProps> | React.ComponentType;
+  component: React.ComponentType<RouteComponentProps<any, any, any>> | React.ComponentType<any>;
 } & RouteProps;
 
 export const RouteLayout: React.FC<Props> = ({
@@ -22,11 +22,18 @@ export const RouteLayout: React.FC<Props> = ({
   if (!isAuthenticated && isPrivate) return <Redirect to={redirect ?? PATH.LOGIN} />;
 
   return (
-    <Route {...props}>
-      <Layout>
-        <Component />
-      </Layout>
-    </Route>
+    <Route
+      {...props}
+      render={(ownProps) => {
+        if (Layout)
+          return (
+            <Layout>
+              <Component {...ownProps} />
+            </Layout>
+          );
+        return <Component {...ownProps} />;
+      }}
+    />
   );
 };
 
